@@ -41,16 +41,17 @@ export async function POST(request: Request) {
 
     // Load logo as base64 so it renders in all email clients without needing a live domain
     let logoBase64 = "";
-    try {
-      const logoPath = path.join(process.cwd(), "public", "logo.png");
-      const logoBuffer = fs.readFileSync(logoPath);
-      logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`;
-    } catch {
-      // Logo not found — will fall back to text
-    }
+    // TODO: Update when KraftNova has a new PNG logo
+    // try {
+    //   const logoPath = path.join(process.cwd(), "public", "logo.png");
+    //   const logoBuffer = fs.readFileSync(logoPath);
+    //   logoBase64 = `data:image/png;base64,${logoBuffer.toString("base64")}`;
+    // } catch {
+    //   // Logo not found — will fall back to text
+    // }
 
     const mailOptions = {
-      from: `"G&G Solutions Web" <${process.env.SMTP_USER}>`,
+      from: `"KraftNova Web" <${process.env.SMTP_USER}>`,
       to: recipients,
       replyTo: email,
       subject: `🔥 ¡Nuevo prospecto! ${name}${company ? ` de ${company}` : ""} quiere contactarlos`,
@@ -81,10 +82,10 @@ export async function POST(request: Request) {
 
           <!-- HEADER with logo -->
           <tr>
-            <td style="background:linear-gradient(135deg,#24377E 0%,#3A5AFE 55%,#00D2FF 100%);padding:36px 32px 28px;text-align:center;">
+            <td style="background:linear-gradient(135deg,#ec4899 0%,#a855f7 55%,#0ea5e9 100%);padding:36px 32px 28px;text-align:center;">
               ${logoBase64
-                ? `<img src="${logoBase64}" alt="G&G Solutions" width="160" style="max-width:160px;height:auto;display:block;margin:0 auto 12px;" />`
-                : `<p style="margin:0 0 12px;font-size:24px;font-weight:900;color:#ffffff;letter-spacing:-0.5px;">G&amp;G Solutions</p>`
+                ? `<img src="${logoBase64}" alt="KraftNova" width="160" style="max-width:160px;height:auto;display:block;margin:0 auto 12px;" />`
+                : `<p style="margin:0 0 12px;font-size:24px;font-weight:900;color:#ffffff;letter-spacing:-0.5px;">KraftNova</p>`
               }
               <p style="margin:0;font-size:13px;font-weight:600;color:rgba(255,255,255,0.65);letter-spacing:1px;">Portal de Contacto Web</p>
             </td>
@@ -106,7 +107,7 @@ export async function POST(request: Request) {
 
               <!-- Intro -->
               <p style="margin:0 0 28px;font-size:15px;color:#475569;line-height:1.7;">
-                Alguien completó el formulario de contacto en <strong>ggsolutionssv.com</strong>. Aquí están sus datos para que puedan darle seguimiento lo antes posible.
+                Alguien completó el formulario de contacto en <strong>kraftnova.com</strong>. Aquí están sus datos para que puedan darle seguimiento lo antes posible.
               </p>
 
               <!-- Info Card -->
@@ -155,8 +156,8 @@ export async function POST(request: Request) {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
-                    <a href="mailto:${email}?subject=Re: Gracias por contactar a G%26G Solutions"
-                       style="display:inline-block;background:#24377E;color:#ffffff;text-decoration:none;padding:16px 40px;border-radius:50px;font-size:15px;font-weight:800;letter-spacing:0.3px;box-shadow:0 4px 20px rgba(36,55,126,0.4);border:2px solid #3A5AFE;">
+                    <a href="mailto:${email}?subject=Re: Gracias por contactar a KraftNova"
+                       style="display:inline-block;background:#ec4899;color:#ffffff;text-decoration:none;padding:16px 40px;border-radius:50px;font-size:15px;font-weight:800;letter-spacing:0.3px;box-shadow:0 4px 20px rgba(236,72,153,0.4);border:2px solid #be185d;">
                       ✉️ &nbsp;Responder a ${name}
                     </a>
                   </td>
@@ -170,11 +171,11 @@ export async function POST(request: Request) {
           <tr>
             <td style="background:#0f172a;padding:24px 32px;text-align:center;">
               ${logoBase64
-                ? `<img src="${logoBase64}" alt="G&G Solutions" width="90" style="max-width:90px;height:auto;display:block;margin:0 auto 10px;opacity:0.5;" />`
-                : `<p style="margin:0 0 6px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.4);">G&amp;G Solutions</p>`
+                ? `<img src="${logoBase64}" alt="KraftNova" width="90" style="max-width:90px;height:auto;display:block;margin:0 auto 10px;opacity:0.5;" />`
+                : `<p style="margin:0 0 6px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.4);">KraftNova</p>`
               }
               <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.3);">
-                Este correo fue generado automáticamente por el formulario de contacto de ggsolutionssv.com
+                Este correo fue generado automáticamente por el formulario de contacto de kraftnova.com
               </p>
             </td>
           </tr>
