@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: "KraftNova — Nearshore Digital Factory",
   description: "We build and maintain your premium digital infrastructure. Website-as-a-Service solutions to take your business to the next level from El Salvador.",
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
   },
 };
 
