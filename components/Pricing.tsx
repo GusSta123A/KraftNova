@@ -6,55 +6,83 @@ import { Check, Info } from "lucide-react";
 const plans = [
   {
     name: "The Starter Pack",
-    idealFor: "Independent technicians, consultants, and local contractors who need a fast, ultra-professional presence geared towards getting calls.",
+    idealFor: "Small businesses, professionals, contractors, coaches, and local restaurants.",
     setupCost: "1,499.00",
     monthlyCost: "149.00",
-    sla: "48 to 72 hours",
-    scope: "One-Page Site",
-    ecommerce: "Not Included",
-    forms: "Out-of-the-box Integration (Stripe/PayPal)",
-    features: [
-      "High-conversion One-Page website",
-      "Google Business Profile creation and optimization",
-      "Premium hosting and SSL certificate",
-      "Daily backups",
-      "Text and image updates at no extra cost"
+    delivery: "10-14 business days",
+    setupFeatures: [
+      "Up to 6 sections/pages (Home, About, Services, Contact, etc.)",
+      "Modern, 100% responsive design optimized for conversions",
+      "Basic technical SEO, speed optimization, and mobile-first approach",
+      "Contact forms + Google Analytics 4 integration",
+      "Domain + premium hosting + SSL for 1 year",
+      "2 rounds of revisions"
+    ],
+    monthlyFeatures: [
+      "5-7 hours of work included per month",
+      "Content updates, minor design changes, and tech support"
+    ],
+    requirements: [
+      "High-resolution brand logos and images",
+      "Main texts (Home, About, Services)",
+      "Desired colors and style (or approval of our proposal)",
+      "Domain access or preferred name",
+      "Content ready or approval to use initial placeholders"
     ],
     popular: false
   },
   {
     name: "The Growth Plan",
-    idealFor: "Agencies, law firms, general contractors, and service companies that need a portfolio or detailed multiple services.",
+    idealFor: "SMEs, clinics, law firms, and local services.",
     setupCost: "2,499.00",
     monthlyCost: "249.00",
-    sla: "24 to 48 hours",
-    scope: "Multi-Page (Up to 6 static pages)",
-    ecommerce: "Not Included",
-    forms: "Out-of-the-box Integration (Stripe/PayPal)",
-    features: [
-      "Web architecture of up to 6 static pages",
-      "Dynamic project portfolio",
-      "Advanced Local SEO",
-      "Multi-step contact forms",
-      "Includes everything in The Starter Pack"
+    delivery: "14-18 business days",
+    setupFeatures: [
+      "Complete website up to 12 sections/pages",
+      "Premium design with subtle animations and great UX",
+      "Advanced On-Page SEO",
+      "Advanced forms + simple integrations (WhatsApp, Google Maps, Calendly)",
+      "Security and performance optimization",
+      "3 rounds of revisions + project handover"
+    ],
+    monthlyFeatures: [
+      "10-12 hours of work included per month",
+      "Frequent updates, conversion improvements, and medium priority support"
+    ],
+    requirements: [
+      "Everything from Starter +",
+      "Complete or near-complete content for all pages",
+      "Access to existing tools (Google Business, Email Marketing)",
+      "Website references to align style",
+      "Specific feature requirement list",
+      "A fast point of contact for revisions"
     ],
     popular: true
   },
   {
     name: "The Premium Integration",
-    idealFor: "Clinics, restaurants, small e-commerce stores, or businesses that need to automate their calendar and charge online.",
+    idealFor: "Growing businesses or companies with more advanced digital needs.",
     setupCost: "3,499.00+",
     monthlyCost: "399.00+",
-    sla: "12 to 24 hours (Priority)",
-    scope: "Dynamic Architecture (Catalogs/Menus)",
-    ecommerce: "Yes (Catalogs of up to 50 products)",
-    forms: "Out-of-the-box Integration (Stripe/PayPal)",
-    features: [
-      "Standard dynamic architecture",
-      "Catalogs of up to 50 products or menus",
-      "System integration (Stripe/PayPal, bookings)",
-      "Automated confirmation sequences",
-      "Email reminders for clients"
+    delivery: "18-25 business days",
+    setupFeatures: [
+      "Advanced website or basic e-commerce (up to 15-18 pages)",
+      "Highly customized design and premium user experience",
+      "Medium integrations (basic payments, simple CRM, Zapier automations)",
+      "Complete technical SEO + initial strategy",
+      "Exhaustive testing and documentation"
+    ],
+    monthlyFeatures: [
+      "20-25 hours included + high priority support",
+      "Development of medium new features and proactive maintenance"
+    ],
+    requirements: [
+      "Everything from Growth +",
+      "Professional content reviewed (texts, images, videos)",
+      "API accesses or third-party service accounts",
+      "Detailed brief of business goals and key features",
+      "Availability for kickoff meetings and weekly reviews",
+      "Complete branding material (style guides, logo variations)"
     ],
     popular: false
   }
@@ -123,22 +151,45 @@ export default function Pricing() {
               </div>
 
               <div className="flex-1">
-                <ul className="space-y-4 text-sm text-slate-300 mb-8">
-                  <li className="flex items-start gap-3">
-                    <Check className="h-5 w-5 text-brand-yellow shrink-0" />
-                    <span><strong>SLA:</strong> {plan.sla}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="h-5 w-5 text-brand-yellow shrink-0" />
-                    <span><strong>Alcance:</strong> {plan.scope}</span>
-                  </li>
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3">
+                <div className="mb-6">
+                  <h4 className="text-xs font-bold uppercase text-pink-500 mb-3 tracking-wider">Setup Includes</h4>
+                  <ul className="space-y-3 text-sm text-slate-300">
+                    <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-brand-yellow shrink-0" />
-                      <span>{feature}</span>
+                      <span><strong>Delivery:</strong> {plan.delivery}</span>
                     </li>
-                  ))}
-                </ul>
+                    {plan.setupFeatures.map((feature, i) => (
+                      <li key={`setup-${i}`} className="flex items-start gap-3">
+                        <Check className="h-5 w-5 text-brand-yellow shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-xs font-bold uppercase text-purple-400 mb-3 tracking-wider">Monthly Maintenance</h4>
+                  <ul className="space-y-3 text-sm text-slate-300">
+                    {plan.monthlyFeatures.map((feature, i) => (
+                      <li key={`monthly-${i}`} className="flex items-start gap-3">
+                        <Check className="h-5 w-5 text-brand-yellow shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">Client Requirements</h4>
+                  <ul className="space-y-3 text-xs text-slate-400">
+                    {plan.requirements.map((req, i) => (
+                      <li key={`req-${i}`} className="flex items-start gap-2">
+                        <div className="h-1.5 w-1.5 rounded-full bg-slate-600 mt-1.5 shrink-0" />
+                        <span>{req}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
               <button className={`w-full py-4 rounded-xl font-bold transition-all backdrop-blur-sm ${plan.popular ? 'bg-pink-600/90 text-white hover:bg-pink-500 shadow-lg shadow-pink-500/25' : 'bg-white/10 text-white hover:bg-white/20 border border-white/5'}`}>
@@ -176,9 +227,12 @@ export default function Pricing() {
               <Info className="h-6 w-6 text-white" />
               <h3 className="text-xl font-bold text-white">Clear Factory Rules</h3>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              To maintain our record delivery times and intact quality, the Starter, Growth, and Premium plans do not include custom software development. They are based on integrations of market-leading tools and proven architectures. If your project requires unique workflows and custom code, our team will guide you to the Custom Solutions plan.
-            </p>
+              <ul className="text-slate-400 text-sm leading-relaxed space-y-2 list-disc pl-5">
+                <li>Delivery times start counting once we have all client requirements approved.</li>
+                <li>If the client delays in delivering content or revisions, delivery times will be extended.</li>
+                <li><strong>Clear policy:</strong> Unused monthly hours do not accumulate (max 1 month rollover).</li>
+                <li><strong>Agile process:</strong> Kickoff → Design Proposal → Development → Revisions → Launch.</li>
+              </ul>
           </motion.div>
 
         </div>

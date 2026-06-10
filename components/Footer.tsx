@@ -51,9 +51,11 @@ export default function Footer() {
             © {new Date().getFullYear()} KraftNova. All rights reserved.
           </p>
           <div className="flex gap-6">
+            {/* 
             <Link href="https://www.facebook.com/kraftnova/" target="_blank" className="text-slate-500 hover:text-cyan-400 transition-colors"><Facebook size={24} strokeWidth={1.5} /></Link>
             <Link href="https://www.instagram.com/kraftnova" target="_blank" className="text-slate-500 hover:text-pink-500 transition-colors"><Instagram size={24} strokeWidth={1.5} /></Link>
             <Link href="https://www.linkedin.com/company/kraftnova" target="_blank" className="text-slate-500 hover:text-purple-500 transition-colors"><Linkedin size={24} strokeWidth={1.5} /></Link>
+            */}
           </div>
         </div>
       </div>

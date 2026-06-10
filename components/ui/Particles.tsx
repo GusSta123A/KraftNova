@@ -41,9 +41,9 @@ export default function Particles({
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 1.5,
-        vy: (Math.random() - 0.5) * 1.5,
-        size: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.3, // Slower for star drift
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2.5 + 0.5, // Varied sizes for stars
       });
     }
 
@@ -96,28 +96,30 @@ export default function Particles({
         ctx.fill();
 
         // Connect particles
-        for (let j = index + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+        if (lineColor !== "transparent") {
+          for (let j = index + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < maxDistance) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            // Calculate opacity based on distance
-            const opacity = 1 - distance / maxDistance;
-            ctx.globalAlpha = opacity;
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            ctx.globalAlpha = 1; // Reset
+            if (distance < maxDistance) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              // Calculate opacity based on distance
+              const opacity = 1 - distance / maxDistance;
+              ctx.globalAlpha = opacity;
+              ctx.strokeStyle = lineColor;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+              ctx.globalAlpha = 1; // Reset
+            }
           }
         }
 
         // Connect to mouse
-        if (distanceMouse < maxDistance) {
+        if (lineColor !== "transparent" && distanceMouse < maxDistance) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
