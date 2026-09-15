@@ -2,13 +2,27 @@
 
 import { motion } from "framer-motion";
 import { Check, Info } from "lucide-react";
+import { useLanguage } from "./LanguageProvider";
 
-const plans = [
+type Plan = {
+  name: string;
+  idealFor: string;
+  setupCost: string;
+  monthlyCost: string;
+  delivery: string;
+  setupFeatures: string[];
+  monthlyFeatures: string[];
+  requirements: string[];
+  popular: boolean;
+};
+
+// --- USA PRICING ---
+const plansUSA: Plan[] = [
   {
     name: "The Starter Pack",
     idealFor: "Small businesses, professionals, contractors, coaches, and local restaurants.",
-    setupCost: "1,499.00",
-    monthlyCost: "149.00",
+    setupCost: "1,999.00",
+    monthlyCost: "199.00",
     delivery: "10-14 business days",
     setupFeatures: [
       "Up to 6 sections/pages (Home, About, Services, Contact, etc.)",
@@ -34,8 +48,8 @@ const plans = [
   {
     name: "The Growth Plan",
     idealFor: "SMEs, clinics, law firms, and local services.",
-    setupCost: "2,499.00",
-    monthlyCost: "249.00",
+    setupCost: "3,499.00",
+    monthlyCost: "349.00",
     delivery: "14-18 business days",
     setupFeatures: [
       "Complete website up to 12 sections/pages",
@@ -62,8 +76,8 @@ const plans = [
   {
     name: "The Premium Integration",
     idealFor: "Growing businesses or companies with more advanced digital needs.",
-    setupCost: "3,499.00+",
-    monthlyCost: "399.00+",
+    setupCost: "4,999.00",
+    monthlyCost: "499.00",
     delivery: "18-25 business days",
     setupFeatures: [
       "Advanced website or basic e-commerce (up to 15-18 pages)",
@@ -88,20 +102,107 @@ const plans = [
   }
 ];
 
+// --- EL SALVADOR PRICING ---
+const plansSV: Plan[] = [
+  {
+    name: "The Starter Pack",
+    idealFor: "Pequeñas empresas, profesionales, y restaurantes locales.",
+    setupCost: "499.00",
+    monthlyCost: "99.00",
+    delivery: "10-14 días hábiles",
+    setupFeatures: [
+      "Hasta 6 secciones/páginas (Inicio, Nosotros, Servicios, Contacto, etc.)",
+      "Diseño moderno, 100% responsivo y optimizado",
+      "SEO técnico básico, velocidad y enfoque móvil",
+      "Formularios de contacto + Google Analytics 4",
+      "Dominio + hosting premium + SSL por 1 año",
+      "2 rondas de revisiones"
+    ],
+    monthlyFeatures: [
+      "5-7 horas de trabajo incluidas por mes",
+      "Actualización de contenido, cambios menores y soporte técnico"
+    ],
+    requirements: [
+      "Logos e imágenes en alta resolución",
+      "Textos principales (Inicio, Nosotros, Servicios)",
+      "Colores y estilo deseado",
+      "Acceso al dominio o nombre deseado",
+      "Contenido listo o aprobación para usar de relleno inicial"
+    ],
+    popular: false
+  },
+  {
+    name: "The Growth Plan",
+    idealFor: "PYMES, clínicas, despachos y servicios medianos.",
+    setupCost: "1,399.00",
+    monthlyCost: "149.00",
+    delivery: "14-18 días hábiles",
+    setupFeatures: [
+      "Sitio web completo de hasta 12 secciones/páginas",
+      "Diseño premium con animaciones y excelente UX",
+      "SEO On-Page Avanzado",
+      "Formularios avanzados + integraciones (WhatsApp, Google Maps, Calendly)",
+      "Optimización de seguridad y rendimiento",
+      "3 rondas de revisiones + entrega del proyecto"
+    ],
+    monthlyFeatures: [
+      "10-12 horas de trabajo incluidas por mes",
+      "Actualizaciones frecuentes y soporte prioridad media"
+    ],
+    requirements: [
+      "Todo lo del Starter +",
+      "Contenido completo para todas las páginas",
+      "Acceso a herramientas existentes (Google Business, Email)",
+      "Sitios web de referencia para alinear el estilo",
+      "Contacto rápido para revisiones"
+    ],
+    popular: true
+  },
+  {
+    name: "The Premium Integration",
+    idealFor: "Empresas en crecimiento con necesidades digitales avanzadas.",
+    setupCost: "2,099.00",
+    monthlyCost: "249.00",
+    delivery: "18-25 días hábiles",
+    setupFeatures: [
+      "Sitio web avanzado o e-commerce básico (hasta 15-18 págs)",
+      "Diseño altamente personalizado y experiencia premium",
+      "Integraciones medias (pagos básicos, CRM simple, Zapier)",
+      "SEO técnico completo + estrategia inicial",
+      "Pruebas exhaustivas y documentación"
+    ],
+    monthlyFeatures: [
+      "20-25 horas incluidas + soporte de alta prioridad",
+      "Desarrollo de nuevas funciones y mantenimiento proactivo"
+    ],
+    requirements: [
+      "Todo lo del Growth +",
+      "Contenido profesional revisado (textos, imágenes, videos)",
+      "Accesos a APIs o servicios de terceros",
+      "Brief detallado de objetivos",
+      "Disponibilidad para reuniones de avance"
+    ],
+    popular: false
+  }
+];
+
 export default function Pricing() {
+  const { language, setLanguage } = useLanguage();
+  const currentPlans = language === "en" ? plansUSA : plansSV;
+
   return (
     <section id="pricing" className="relative py-24 sm:py-32 bg-transparent">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="mx-auto max-w-4xl text-center mb-16">
+        <div className="mx-auto max-w-4xl text-center mb-10">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-base font-bold leading-7 text-brand-yellow tracking-wider uppercase"
           >
-            WaaS Plans
+            {language === "es" ? "Planes WaaS" : "WaaS Plans"}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -110,7 +211,7 @@ export default function Pricing() {
             transition={{ delay: 0.1 }}
             className="mt-2 text-4xl font-black tracking-tight text-white sm:text-5xl"
           >
-            Transparent Subscriptions
+            {language === "es" ? "Suscripciones Transparentes" : "Transparent Subscriptions"}
           </motion.p>
         </div>
 
@@ -119,9 +220,9 @@ export default function Pricing() {
           {/* Subtle background glow for pricing section */}
           <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10 blur-[100px] pointer-events-none -z-10" />
           
-          {plans.map((plan, idx) => (
+          {currentPlans.map((plan, idx) => (
             <motion.div 
-              key={plan.name}
+              key={plan.name + language}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -130,7 +231,7 @@ export default function Pricing() {
             >
               {plan.popular && (
                 <div className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-sm font-bold shadow-sm">
-                  Most Popular
+                  {language === "es" ? "Más Popular" : "Most Popular"}
                 </div>
               )}
               
@@ -146,17 +247,19 @@ export default function Pricing() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-xl font-bold text-slate-300">USD {plan.monthlyCost}</span>
-                  <span className="text-sm text-slate-500">/ month (Maintenance)</span>
+                  <span className="text-sm text-slate-500">{language === "es" ? "/ mes (Mantenimiento)" : "/ month (Maintenance)"}</span>
                 </div>
               </div>
 
               <div className="flex-1">
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold uppercase text-pink-500 mb-3 tracking-wider">Setup Includes</h4>
+                  <h4 className="text-xs font-bold uppercase text-pink-500 mb-3 tracking-wider">
+                    {language === "es" ? "Setup Incluye" : "Setup Includes"}
+                  </h4>
                   <ul className="space-y-3 text-sm text-slate-300">
                     <li className="flex items-start gap-3">
                       <Check className="h-5 w-5 text-brand-yellow shrink-0" />
-                      <span><strong>Delivery:</strong> {plan.delivery}</span>
+                      <span><strong>{language === "es" ? "Entrega:" : "Delivery:"}</strong> {plan.delivery}</span>
                     </li>
                     {plan.setupFeatures.map((feature, i) => (
                       <li key={`setup-${i}`} className="flex items-start gap-3">
@@ -168,7 +271,9 @@ export default function Pricing() {
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold uppercase text-purple-400 mb-3 tracking-wider">Monthly Maintenance</h4>
+                  <h4 className="text-xs font-bold uppercase text-purple-400 mb-3 tracking-wider">
+                    {language === "es" ? "Mantenimiento Mensual" : "Monthly Maintenance"}
+                  </h4>
                   <ul className="space-y-3 text-sm text-slate-300">
                     {plan.monthlyFeatures.map((feature, i) => (
                       <li key={`monthly-${i}`} className="flex items-start gap-3">
@@ -180,7 +285,9 @@ export default function Pricing() {
                 </div>
 
                 <div className="mb-8">
-                  <h4 className="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">Client Requirements</h4>
+                  <h4 className="text-xs font-bold uppercase text-slate-500 mb-3 tracking-wider">
+                    {language === "es" ? "Requerimientos del Cliente" : "Client Requirements"}
+                  </h4>
                   <ul className="space-y-3 text-xs text-slate-400">
                     {plan.requirements.map((req, i) => (
                       <li key={`req-${i}`} className="flex items-start gap-2">
@@ -193,7 +300,7 @@ export default function Pricing() {
               </div>
 
               <button className={`w-full py-4 rounded-xl font-bold transition-all backdrop-blur-sm ${plan.popular ? 'bg-pink-600/90 text-white hover:bg-pink-500 shadow-lg shadow-pink-500/25' : 'bg-white/10 text-white hover:bg-white/20 border border-white/5'}`}>
-                Start Project
+                {language === "es" ? "Iniciar Proyecto" : "Start Project"}
               </button>
             </motion.div>
           ))}
@@ -208,12 +315,15 @@ export default function Pricing() {
             viewport={{ once: true }}
             className="p-8 rounded-3xl bg-[#0f172a]/50 backdrop-blur-xl border border-white/10 text-white shadow-xl"
           >
-            <h3 className="text-2xl font-bold text-pink-400 mb-4">KraftNova Custom Solutions</h3>
+            <h3 className="text-2xl font-bold text-pink-400 mb-4">
+              {language === "es" ? "Soluciones Personalizadas KraftNova" : "KraftNova Custom Solutions"}
+            </h3>
             <p className="text-slate-300 mb-4">
-              <strong>Ideal for:</strong> Franchises, corporate companies, or startups that need custom platforms, ERPs, billing systems, or complex web applications.
+              <strong>{language === "es" ? "Ideal para:" : "Ideal for:"}</strong> {language === "es" ? "Franquicias, empresas corporativas o startups que necesitan plataformas a medida, ERPs, sistemas de facturación o aplicaciones web complejas." : "Franchises, corporate companies, or startups that need custom platforms, ERPs, billing systems, or complex web applications."}
             </p>
             <p className="text-slate-400 text-sm leading-relaxed">
-              If your business requires development from scratch, deep relational databases, integrations with electronic billing, or enterprise management systems, we assign a dedicated team of engineers, software architects, and QA. <strong>Custom cost and SLA.</strong>
+              {language === "es" ? "Si tu negocio requiere desarrollo desde cero, bases de datos relacionales profundas, integraciones con facturación electrónica o sistemas de gestión empresarial, asignamos un equipo dedicado de ingenieros, arquitectos de software y QA. " : "If your business requires development from scratch, deep relational databases, integrations with electronic billing, or enterprise management systems, we assign a dedicated team of engineers, software architects, and QA. "}
+              <strong>{language === "es" ? "Costo y SLA personalizados." : "Custom cost and SLA."}</strong>
             </p>
           </motion.div>
 
@@ -225,13 +335,26 @@ export default function Pricing() {
           >
             <div className="flex items-center gap-2 mb-4">
               <Info className="h-6 w-6 text-white" />
-              <h3 className="text-xl font-bold text-white">Clear Factory Rules</h3>
+              <h3 className="text-xl font-bold text-white">
+                {language === "es" ? "Reglas Claras de Fábrica" : "Clear Factory Rules"}
+              </h3>
             </div>
               <ul className="text-slate-400 text-sm leading-relaxed space-y-2 list-disc pl-5">
-                <li>Delivery times start counting once we have all client requirements approved.</li>
-                <li>If the client delays in delivering content or revisions, delivery times will be extended.</li>
-                <li><strong>Clear policy:</strong> Unused monthly hours do not accumulate (max 1 month rollover).</li>
-                <li><strong>Agile process:</strong> Kickoff → Design Proposal → Development → Revisions → Launch.</li>
+                {language === "es" ? (
+                  <>
+                    <li>Los tiempos de entrega comienzan a contar una vez que tenemos todos los requisitos del cliente aprobados.</li>
+                    <li>Si el cliente se demora en entregar contenido o revisiones, los tiempos de entrega se extenderán.</li>
+                    <li><strong>Política clara:</strong> Las horas mensuales no utilizadas no se acumulan (máx. 1 mes de arrastre).</li>
+                    <li><strong>Proceso ágil:</strong> Kickoff → Propuesta de Diseño → Desarrollo → Revisiones → Lanzamiento.</li>
+                  </>
+                ) : (
+                  <>
+                    <li>Delivery times start counting once we have all client requirements approved.</li>
+                    <li>If the client delays in delivering content or revisions, delivery times will be extended.</li>
+                    <li><strong>Clear policy:</strong> Unused monthly hours do not accumulate (max 1 month rollover).</li>
+                    <li><strong>Agile process:</strong> Kickoff → Design Proposal → Development → Revisions → Launch.</li>
+                  </>
+                )}
               </ul>
           </motion.div>
 

@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Use a nosync folder to prevent iCloud from hanging the Next.js compilation
+  distDir: '.next.nosync',
+
   // Standalone output bundles only what's needed — perfect for Azure App Service
   output: "standalone",
 

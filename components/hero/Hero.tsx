@@ -3,17 +3,41 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { useLanguage } from "../LanguageProvider";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
+  const { language } = useLanguage();
   
   // Cinematic scroll transforms
   const yText = useTransform(scrollY, [0, 600], [0, -180]);
   const opacityText = useTransform(scrollY, [0, 350], [1, 0]);
   const scaleText = useTransform(scrollY, [0, 600], [1, 1.12]);
   const blurText = useTransform(scrollY, [0, 350], ["blur(0px)", "blur(8px)"]);
+
+  const content = {
+    en: {
+      badge: "KraftNova Premium Services",
+      title1: "Your High-Level Digital Infrastructure,",
+      title2: "Without the Inflated Prices of Traditional Agencies.",
+      desc: "We build fast, optimized websites and lead generation systems for US companies. We operate under a Nearshore \"Digital Factory\" model from El Salvador: US quality, support in your same time zone, and transparent flat-rate pricing.",
+      btn1: "View Pricing",
+      btn2: "Contact Us",
+      scroll: "Scroll"
+    },
+    es: {
+      badge: "Servicios Premium KraftNova",
+      title1: "Tu Infraestructura Digital de Alto Nivel,",
+      title2: "Sin los Precios Inflados de las Agencias Tradicionales.",
+      desc: "Construimos sitios web rápidos y sistemas de generación de leads. Operamos bajo un modelo de \"Fábrica Digital\" Nearshore desde El Salvador: calidad de nivel internacional, soporte en tu misma zona horaria y precios fijos transparentes.",
+      btn1: "Ver Precios",
+      btn2: "Contáctanos",
+      scroll: "Desliza"
+    }
+  };
+
+  const t = content[language];
 
   return (
     <section ref={sectionRef} className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-transparent">
@@ -29,7 +53,7 @@ export default function Hero() {
         >
           <div className="px-4 py-1.5 rounded-full border border-brand-navy/10 bg-brand-navy/5 backdrop-blur-md text-brand-navy font-bold text-sm tracking-wide shadow-sm flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-yellow animate-pulse" />
-            KraftNova Premium Services
+            {t.badge}
           </div>
         </motion.div>
 
@@ -38,10 +62,10 @@ export default function Hero() {
           style={{ y: yText, opacity: opacityText, scale: scaleText, filter: blurText }}
           className="max-w-5xl text-4xl font-black tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] will-change-transform"
         >
-          Your High-Level Digital Infrastructure,
+          {t.title1}
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">
-            Without the Inflated Prices of Traditional Agencies.
+            {t.title2}
           </span>
         </motion.h1>
 
@@ -50,7 +74,7 @@ export default function Hero() {
           style={{ y: yText, opacity: opacityText }}
           className="mt-8 max-w-3xl text-lg text-slate-300 sm:text-xl font-medium will-change-transform leading-relaxed"
         >
-          We build fast, optimized websites and lead generation systems for US companies. We operate under a Nearshore "Digital Factory" model from El Salvador: US quality, support in your same time zone, and transparent flat-rate pricing.
+          {t.desc}
         </motion.p>
 
         <motion.div
@@ -63,7 +87,7 @@ export default function Hero() {
             href="#pricing"
             className="group px-10 py-4 rounded-full bg-pink-600/90 hover:bg-pink-500 text-white font-bold text-base transition-all hover:scale-105 backdrop-blur-md shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] flex items-center gap-2"
           >
-            View Pricing
+            {t.btn1}
             <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
           </Link>
           {/* Secondary CTA - Clean Apple Glass */}
@@ -71,7 +95,7 @@ export default function Hero() {
             href="#contacto"
             className="group px-10 py-4 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold text-base transition-all hover:scale-105 backdrop-blur-xl flex items-center gap-2"
           >
-            Contact Us
+            {t.btn2}
             <span className="inline-block transition-transform group-hover:translate-x-1 opacity-60 group-hover:opacity-100">→</span>
           </Link>
         </motion.div>
@@ -83,7 +107,7 @@ export default function Hero() {
         style={{ opacity: opacityText }}
         className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
       >
-        <span className="text-xs font-black text-brand-navy tracking-widest uppercase">Scroll</span>
+        <span className="text-xs font-black text-brand-navy tracking-widest uppercase">{t.scroll}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}

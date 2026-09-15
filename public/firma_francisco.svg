@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200" style="background: white;">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;display=swap');
+      .kraft { fill: #0f172a; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 42px; letter-spacing: -2px; }
+      .nova { fill: #ec4899; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 42px; letter-spacing: -2px; }
+      .name { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 24px; fill: #0f172a; }
+      .title { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; fill: #ec4899; }
+      .info { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 15px; fill: #475569; }
+      .link { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; fill: #3A5AFE; }
+      .line { stroke: #e2e8f0; stroke-width: 3; stroke-linecap: round; }
+    </style>
+  </defs>
+  
+  <!-- Logo -->
+  <text x="40" y="112"><tspan class="kraft">Kraft</tspan><tspan class="nova">Nova</tspan></text>
+  
+  <!-- Separator -->
+  <line x1="250" y1="50" x2="250" y2="150" class="line" />
+
+  <!-- Text -->
+  <text x="285" y="75" class="name">Francisco Orlando Prado Arce</text>
+  <text x="285" y="100" class="title">Sales Development Representative <tspan fill="#94a3b8">|</tspan> <tspan fill="#0f172a">KraftNova El Salvador</tspan></text>
+  <text x="285" y="125" class="info">Oferta web: <tspan class="link">kraftnova.dev/</tspan></text>
+  <text x="285" y="148" class="info">Teléfono/WhatsApp: <tspan fill="#0f172a" font-weight="600">+503 7948-9355</tspan></text>
+</svg>
